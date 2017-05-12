@@ -12,18 +12,16 @@ import static org.junit.Assert.*;
  * Created by Joe on 5/12/2017.
  */
 @RunWith(Parameterized.class)
-public class AreaTest {
-    double length;
-    double width;
+public class AreaTest2 {
+    double radius;
     double answer;
     static int counter;
     @BeforeClass
     public static void initial(){
         counter = 0;
     }
-    public AreaTest(int length, int width, int answer){
-        this.length = length;
-        this.width = width;
+    public AreaTest2(double radius, double answer){
+        this.radius = radius;
         this.answer = answer;
     }
     @Before
@@ -35,24 +33,23 @@ public class AreaTest {
         System.out.println("Test case " + counter + " finished");
         counter++;
     }
-    @Parameterized.Parameters(name = "{index}: areaOfRectangle({0}*{1}) = {2}")
+
+    @Parameterized.Parameters(name = "{index}: areaOfRectangle({0}*{0}*Math.PI) = {1}")
     public static Collection numbers(){
         return Arrays.asList(new Object[][]{
-                {1, 1, 1},
-                {2, 1, 2},
-                {3, 4, 12},
+                {1, Math.PI},
+                {2, Math.PI*2*2},
+                {3, Math.PI*3*3},
 
         });
     }
     private static final double DELTA = 1e-15;
     @Test
-    public void areaOfRectangle() throws Exception {
-        //System.out.println(length + " " + width + " " + answer);
-        assertEquals(answer, Area.areaOfRectangle(length, width), DELTA);
+    public void areaOfCircle() throws Exception {
+        assertEquals(answer, Area.areaOfCircle(radius), DELTA);
     }
     @AfterClass
     public static void done(){
         System.out.println("Testing finished!");
     }
-
 }
